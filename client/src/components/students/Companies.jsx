@@ -1,5 +1,5 @@
 import React from "react";
-import { assets } from "../../assets/assets"; // Adjust the path as necessary
+import { assets } from "../../assets/assets"; 
 
 const Companies = () => {
   return <div className="pt-16">
