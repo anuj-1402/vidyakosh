@@ -12,6 +12,8 @@ import AddCourse from './pages/educator/AddCourse'
 import MyCourses from './pages/educator/MyCourses'
 import StudentsEnrolled from './pages/educator/StudentsEnrolled'
 import Navbar from './components/students/Navbar.jsx'
+import "quill/dist/quill.snow.css"
+
 
 export default function App() {
   const isEducatorRoute=useMatch('/educator/*');
@@ -27,7 +29,7 @@ export default function App() {
       <Route path="/my-enrollments" element={<MyEnrollments />} />
       <Route path="/loading/:path" element={<Loading />} />
     <Route path="/educator" element={<Educator />}>
-      <Route path="educator" element={<Dashboard />} />
+      <Route index element={<Dashboard />} />
       <Route path="add-course" element={<AddCourse />} />
       <Route path="my-courses" element={<MyCourses />} />
       <Route path="students-enrolled" element={<StudentsEnrolled />} />

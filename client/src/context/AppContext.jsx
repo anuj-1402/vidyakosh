@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { dummyCourses } from "../assets/assets";
+import { dummyCourses, dummyDashboardData } from "../assets/assets";
 import { useState,useEffect } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +12,16 @@ export const AppProvider = (props) => {
   const navigate=useNavigate()
   const [allCourses,setAllCourses]=useState([])
   const [isEducator,setIsEducator]=useState(true);
-  const [enrolledCourses,setEnrolledCourses]=useState([]);
+  const [dashboardData, setDashboardData] = useState(null);
 
   
   //FETCH ALL COURSES 
   const fetchAllCourses= async () => {
     setAllCourses(dummyCourses)
   }
+  const fetchDashboardData = async () => {
+    setDashboardData(dummyDashboardData);
+  };
   // function to calculate average rating of course
   const calculateRating = (course) => {
    if(course.courseRatings.length===0) return 0;
@@ -51,19 +54,14 @@ export const AppProvider = (props) => {
     })
     return totalLectures;
   }
-  //fetch user enroll courses
-  const fetchUserEnrolledCourses = async () => {
-
-    setEnrolledCourses(dummyCourses);
-  };
   useEffect(() => {
     fetchAllCourses()
-    fetchUserEnrolledCourses();
+    fetchDashboardData();
   }, [])
   const value ={
-    enrolledCourses,setEnrolledCourses,fetchUserEnrolledCourses,
     currency,
-    allCourses,navigate,calculateRating,isEducator,setIsEducator,calculateChapterTime,calculateCourseDuration,calculateNoofLectures
+    allCourses,navigate,calculateRating,isEducator,setIsEducator,calculateChapterTime,calculateCourseDuration,calculateNoofLectures,
+    dashboardData,enrolledCourses:allCourses
   }
   return(<AppContext.Provider value={value}>{props.children}</AppContext.Provider>)
 };
